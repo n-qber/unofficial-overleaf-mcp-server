@@ -21,10 +21,26 @@ This MCP Server authenticates to Overleaf using a session cookie. You must provi
 1. Log into your Overleaf account in your browser.
 2. Open the Developer Tools (F12) -> Application / Storage -> Cookies.
 3. Find the `overleaf_session2` cookie.
-4. Set the value as an environment variable:
+4. Set the value as an environment variable (or include it in your MCP configuration).
 
-```bash
-export OVERLEAF_COOKIE="overleaf_session2=s%3A..."
+### Adding to Antigravity IDE / Gemini
+
+To use this server directly inside the Antigravity IDE or Gemini agents, add the following configuration to `~/.gemini/config/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "overleaf": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/unofficial-overleaf-mcp-server/build/index.js"
+      ],
+      "env": {
+        "OVERLEAF_COOKIE": "overleaf_session2=s%3A..."
+      }
+    }
+  }
+}
 ```
 
 ## Available MCP Tools
